@@ -193,7 +193,11 @@ class _FaceEmbedding:
         converted_faces = {}
         # Process each item in the list
         for i, media in enumerate(faces):
-            new_faces = self._get_face(media)
+            try:
+                new_faces = self._get_face(media)
+            except Exception as e:
+                print(f"Error loading faces for input {i}: {e}")
+                continue
             if new_faces is None:
                 print(f"No faces could be loaded for input {i}")
                 continue
